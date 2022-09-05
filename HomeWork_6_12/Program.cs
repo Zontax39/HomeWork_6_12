@@ -33,6 +33,7 @@ namespace HomeWork_6_12
         private static void Main(string[] args)
         {
             Zoopark zoopark = new Zoopark();
+            zoopark.Start();
         }
     }
 
@@ -56,26 +57,24 @@ namespace HomeWork_6_12
 
             while (isOpen)
             {
-                Console.Write("Выбирите вальер к которому хотите подойти:");
+                Console.Clear();
+                Console.WriteLine("Выбирите вальер к которому хотите подойти:");
                 ShowAllAviaries();
                 int userInput = UserUtils.GetNumber();
-
-
-
+                _aviaries[userInput - 1].ShowInfo();
             }
         }
 
         private void ShowAllAviaries()
         {
             int countAviaries = 0;
+
             foreach (Aviary aviary in _aviaries)
             {
                 countAviaries++;
                 Console.WriteLine($"{countAviaries}.{aviary.Name}");
             }
         }
-
-        private void 
     }
 
     internal class Aviary
@@ -96,14 +95,37 @@ namespace HomeWork_6_12
             _sound = animal.AnimalHowl;
         }
 
+        public void ShowInfo()
+        {
+            Console.Clear();
+            Console.WriteLine($"Количество животных: {_countAnimals}");
+            Console.WriteLine($"Звук: {_sound}");
+
+            int numberOfMale = 0;
+            int numberOfFemale = 0;
+
+            foreach(Animal animal in _animals)
+            {
+                if (animal.Gender == "Мужской")
+                {
+                    numberOfMale++;
+                }
+                else
+                {
+                    numberOfFemale++;
+                }
+            }
+            Console.WriteLine($"Особей  мужского пола в вальере: {numberOfMale}");
+            Console.WriteLine($"Особей женского пола в вальере: {numberOfFemale}");
+            Console.ReadKey();
+        }
+
         private void FillingAviary(Animal animal)
         {
             int minAnimals = 1;
             int maxAnimals = 20;
             _animals = new List<Animal>();
             int countMount = _random.Next(minAnimals, maxAnimals);
-            int numberAnimalSpecies = 5;
-            int speciesAnimal = _random.Next(1, numberAnimalSpecies);
 
             for (int i = 0; i < countMount; i++)
             {
@@ -132,7 +154,7 @@ namespace HomeWork_6_12
         private static string MenGender = "Мужской";
         private static string WomanGender = "Женский";
 
-        protected string Gender { get; private set; }
+        public string Gender { get; protected set; }
         public string AnimalHowl { get; protected set; }
         public string Name { get; protected set; }
 
@@ -158,7 +180,7 @@ namespace HomeWork_6_12
     {
         public Cows()
         {
-            Name = "Корова";
+            Name = "Коров";
             Gender = RandomSex();
             AnimalHowl = "Мууу-муууу";
         }
@@ -168,7 +190,7 @@ namespace HomeWork_6_12
     {
         public Dogs()
         {
-            Name = "Собака";
+            Name = "Собак";
             Gender = RandomSex();
             AnimalHowl = "Гав - гав";
         }
@@ -178,7 +200,7 @@ namespace HomeWork_6_12
     {
         public Lions()
         {
-            Name = "Лев";
+            Name = "Львов";
             Gender = RandomSex();
             AnimalHowl = "РЫЫЫЫЫЫЫЫЫЫ";
         }
@@ -188,7 +210,7 @@ namespace HomeWork_6_12
     {
         public Monkees()
         {
-            Name = "Обезьяна";
+            Name = "Обезьян";
             Gender = RandomSex();
             AnimalHowl = "УАА - УААА";
         }
