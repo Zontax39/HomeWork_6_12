@@ -61,7 +61,15 @@ namespace HomeWork_6_12
                 Console.WriteLine("Выбирите вальер к которому хотите подойти:");
                 ShowAllAviaries();
                 int userInput = UserUtils.GetNumber();
-                _aviaries[userInput - 1].ShowInfo();
+
+                if (userInput < _aviaries.Count)
+                {
+                    _aviaries[userInput - 1].ShowInfo();
+                }
+                else
+                {
+                    Console.WriteLine("Не верный вальер!");
+                }
             }
         }
 
