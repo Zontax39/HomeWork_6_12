@@ -32,16 +32,16 @@ namespace HomeWork_6_12
     {
         private static void Main(string[] args)
         {
-            Zoopark zoopark = new Zoopark();
+            Zoo zoopark = new Zoo();
             zoopark.Start();
         }
     }
 
-    internal class Zoopark
+    internal class Zoo
     {
         private List<Aviary> _aviaries;
 
-        public Zoopark()
+        public Zoo()
         {
             _aviaries = new List<Aviary>();
             _aviaries.Add(new Aviary(new Lions()));
@@ -62,7 +62,7 @@ namespace HomeWork_6_12
                 ShowAllAviaries();
                 int userInput = UserUtils.GetNumber();
 
-                if (userInput < _aviaries.Count)
+                if (userInput <= _aviaries.Count && userInput > 0)
                 {
                     _aviaries[userInput - 1].ShowInfo();
                 }
@@ -97,10 +97,10 @@ namespace HomeWork_6_12
         public Aviary(Animal animal)
         {
             _random = new Random();
-            FillingAviary(animal);
+            Fill(animal);
             _countAnimals = _animals.Count;
             Name = $"Загон для {animal.Name}";
-            _sound = animal.AnimalHowl;
+            _sound = animal.Howl;
         }
 
         public void ShowInfo()
@@ -112,7 +112,7 @@ namespace HomeWork_6_12
             int numberOfMale = 0;
             int numberOfFemale = 0;
 
-            foreach(Animal animal in _animals)
+            foreach (Animal animal in _animals)
             {
                 if (animal.Gender == "Мужской")
                 {
@@ -128,7 +128,7 @@ namespace HomeWork_6_12
             Console.ReadKey();
         }
 
-        private void FillingAviary(Animal animal)
+        private void Fill(Animal animal)
         {
             int minAnimals = 1;
             int maxAnimals = 20;
@@ -159,14 +159,14 @@ namespace HomeWork_6_12
 
     internal abstract class Animal
     {
-        private static string MenGender = "Мужской";
-        private static string WomanGender = "Женский";
+        private const string MenGender = "Мужской";
+        private const string WomanGender = "Женский";
 
         public string Gender { get; protected set; }
-        public string AnimalHowl { get; protected set; }
+        public string Howl { get; protected set; }
         public string Name { get; protected set; }
 
-        public static string RandomSex()
+        public string GetGender()
         {
             Random random = new Random();
             int minValue = 1;
@@ -189,8 +189,8 @@ namespace HomeWork_6_12
         public Cows()
         {
             Name = "Коров";
-            Gender = RandomSex();
-            AnimalHowl = "Мууу-муууу";
+            Gender = GetGender();
+            Howl = "Мууу-муууу";
         }
     }
 
@@ -199,8 +199,8 @@ namespace HomeWork_6_12
         public Dogs()
         {
             Name = "Собак";
-            Gender = RandomSex();
-            AnimalHowl = "Гав - гав";
+            Gender = GetGender();
+            Howl = "Гав - гав";
         }
     }
 
@@ -209,8 +209,8 @@ namespace HomeWork_6_12
         public Lions()
         {
             Name = "Львов";
-            Gender = RandomSex();
-            AnimalHowl = "РЫЫЫЫЫЫЫЫЫЫ";
+            Gender = GetGender();
+            Howl = "РЫЫЫЫЫЫЫЫЫЫ";
         }
     }
 
@@ -219,8 +219,8 @@ namespace HomeWork_6_12
         public Monkees()
         {
             Name = "Обезьян";
-            Gender = RandomSex();
-            AnimalHowl = "УАА - УААА";
+            Gender = GetGender();
+            Howl = "УАА - УААА";
         }
     }
 }
