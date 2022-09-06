@@ -159,28 +159,19 @@ namespace HomeWork_6_12
 
     internal abstract class Animal
     {
-        private const string MenGender = "Мужской";
-        private const string WomanGender = "Женский";
-
         public string Gender { get; protected set; }
         public string Howl { get; protected set; }
         public string Name { get; protected set; }
 
         public string GetGender()
         {
+            List<string> genders = new List<string>();
+            genders.Add("Мужской");
+            genders.Add("Женский");
             Random random = new Random();
-            int minValue = 1;
-            int maxValue = 3;
-            int gender = random.Next(minValue, maxValue);
-
-            if (gender == 1)
-            {
-                return WomanGender;
-            }
-            else
-            {
-                return MenGender;
-            }
+            int maxValue = 2;
+            int index = random.Next(maxValue);
+            return genders[index];
         }
     }
 
